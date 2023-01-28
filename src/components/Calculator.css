@@ -1,0 +1,19 @@
+.calculator-grid {
+    margin: 5vh 0 5vh 0;
+    width: 50%;
+    height: 40vh;
+    background-color: orangered;
+
+    display: grid;
+    grid-template-rows: repeat(4,6rem);
+    grid-template-columns: minmax(6rem,auto) repeat(5,6rem);
+}
+
+.span-two {
+    grid-column: span 2;
+}
+
+.output {
+    grid-column: 1/-1;
+    background-color: darkviolet;
+}
