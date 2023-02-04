@@ -1,12 +1,22 @@
 .calculator-grid {
     margin: 5vh 0 5vh 0;
-    width: 50%;
-    height: 40vh;
-    background-color: orangered;
+    width: auto;
+    height: auto;
+    background-color: #ff1238;
 
     display: grid;
-    grid-template-rows: repeat(4,6rem);
-    grid-template-columns: minmax(6rem,auto) repeat(5,6rem);
+    grid-template-columns: repeat(4,6rem);
+    grid-template-rows: minmax(6rem,auto) repeat(5,6rem);
+}
+
+.calculator-grid > button {
+    background: linear-gradient(180deg, rgba(0,245,255,1) 4%, rgba(0,57,255,1)  15%, rgba(0,57,255,1) 85%, rgba(0,245,255,1) 96%);
+
+    color: ghostwhite;
+    font-size: x-large;
+
+    border: 2px solid lightslategray;
+
 }
 
 .span-two {
@@ -15,5 +25,22 @@
 
 .output {
     grid-column: 1/-1;
-    background-color: darkviolet;
+    background-color: #282c34;
+
+    color: ghostwhite;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.output .calculation {
+    color: rgba(248,248,255,0.85);
+    font-size: 2.2rem;
+}
+
+.output .result {
+    color: ghostwhite;
+    font-size: 3rem;
 }
