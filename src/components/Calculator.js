@@ -1,58 +1,61 @@
 import "./Calculator.css";
 import {useReducer} from "react";
+import Digit from "./CalculatorComponents/Digit";
+import Operator from "./CalculatorComponents/Operator"
 
-
-const OPERATIONS = {
-    NEWNUMBER: "NewNumber",
-    ADD: "Add",
-    SUBSTRACT: "Substract",
-    MULTIPLY: "Multiply",
-    DIVIDE: "Divide",
+const ACTIONS = {
+    NEW_NUMBER: "NewNumber",
+    OPERATOR: "Operator",
     RESET: "Reset",
     DELETE: "Delete",
     POINT: "Point",
     EQUALS: "Equals"
 }
 
+function addNumber(state, newNumber) {
+    console.log("addNum: ");
+    console.log(newNumber);
+    return {...state, currentNumber: newNumber};
+}
 
+function addOperator(state, operatorType) {
+    console.log("addOpp: ");
+    console.log(operatorType);
+}
 
-function reducer(state, action) {
-    switch (action.type) {
-        case OPERATIONS.NEWNUMBER:
-            console.log("newNum -> "+action.newNumber);
-            break;
-        case OPERATIONS.ADD:
-            console.log("add");
-            break;
-        case OPERATIONS.SUBSTRACT:
-            console.log("sub");
-            break;
-        case OPERATIONS.MULTIPLY:
-            console.log("mul");
-            break;
-        case OPERATIONS.DIVIDE:
-            console.log("divid");
-            break;
-        case OPERATIONS.RESET:
+function reducer(state, {type, payload}) {
+    switch (type) {
+        case ACTIONS.NEW_NUMBER:
+            return addNumber(state, payload);
+        case ACTIONS.OPERATOR:
+            return addOperator(state, payload)
+        case ACTIONS.RESET:
             console.log("reset");
             break;
-        case OPERATIONS.DELETE:
+        case ACTIONS.DELETE:
             console.log("delete");
             break;
-        case OPERATIONS.POINT:
+        case ACTIONS.POINT:
             console.log("point");
             break;
-        case OPERATIONS.EQUALS:
+        case ACTIONS.EQUALS:
             console.log("equals");
             break;
         default:
-            console.log("ERREUR REDUCER");
+            console.log("ERREUR REDUCER: ");
+            console.log(state);
+            console.log(type);
+            console.log(payload);
     }
 }
 
 
 function Calculator() {
-    const [state, dispatch] = useReducer(reducer, {});
+    const [state, dispatch] = useReducer(reducer,{
+        previousNumber: null,
+        currentNumber: null,
+        operator: null
+    });
     
     return (
         <div className="calculator-grid">
@@ -62,22 +65,22 @@ function Calculator() {
             </div>
             <button className="span-two" onClick={() => dispatch({type: "Reset"})}>AC</button>
             <button onClick={() => dispatch({type: "Delete"})}>DEL</button>
-            <button onClick={() => dispatch({type: "Divide"})}>÷</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 1})}>1</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 2})}>2</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 3})}>3</button>
-            <button onClick={() => dispatch({type: "Multiply"})}>x</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 4})}>4</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 5})}>5</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 6})}>6</button>
-            <button onClick={() => dispatch({type: "Add"})}>+</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 7})}>7</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 8})}>8</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 9})}>9</button>
-            <button onClick={() => dispatch({type: "Substract"})}>-</button>
-            <button onClick={() => dispatch({type: "Point"})}>.</button>
-            <button onClick={() => dispatch({type: "NewNumber", newNumber: 0})}>0</button>
-            <button className="span-two" onClick={() => dispatch({type: "Equals"})}>=</button>
+            <Operator operatorType="÷" dispatch={(operatorType) => dispatch({type: "Operator", payload: operatorType})}/>
+            <Digit digit="1" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Digit digit="2" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Digit digit="3" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Operator operatorType="x" dispatch={(operatorType) => dispatch({type: "Operator", payload: operatorType})}/>
+            <Digit digit="4" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Digit digit="5" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Digit digit="6" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Operator operatorType="+" dispatch={(operatorType) => dispatch({type: "Operator", payload: operatorType})}/>
+            <Digit digit="7" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Digit digit="8" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Digit digit="9" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Operator operatorType="-" dispatch={(operatorType) => dispatch({type: "Operator", payload: operatorType})}/>
+            <Digit digit="." dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Digit digit="0" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
+            <Operator operatorType="=" dispatch={(operatorType) => dispatch({type: "Operator", payload: operatorType})}/>
         </div>
     );
 }
