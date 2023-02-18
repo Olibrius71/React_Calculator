@@ -13,39 +13,93 @@ const ACTIONS = {
 }
 
 function addNumber(state, newNumber) {
-    console.log("addNum: ");
-    console.log(newNumber);
-    return {...state, currentNumber: newNumber};
+    //console.table(state);
+    if (newNumber!==".") {
+        if (state.currentNumber != null) {
+            return {...state, currentNumber: state.currentNumber.toString() + newNumber.toString()};
+        }
+        return {
+            ...state,
+            currentNumber: newNumber
+        }
+    }
 }
 
-function addOperator(state, operatorType) {
+/*
+function handleOperator(state, operatorType) {
+    if (operatorType !== "=") {
+        return {
+            ...state,
+            operator: operatorType
+        }
+    }
+    switch (operatorType) {
+        case "+":
+            return ;
+        case "-":
+            return
+        case "x":
+            return
+        case "÷":
+            return
+        case "=":
+            return
+        default:
+            console.log("ERREUR OPERATOR");
+    }
     console.log("addOpp: ");
-    console.log(operatorType);
+    console.table(state);
+    console.table(operatorType);
+}
+*/
+
+
+function handleEquals(state) {
+    if (state.currentNumber == null || state.previousNumber == null) {
+        console.log("UN DES 2 NOMBRES N'A PAS DE VALEUR");
+        return;
+    }
+    console.table(state);
+    switch (state.operator) {
+        case "+":
+            return {
+                ...state,
+                currentNumber: parseFloat(state.previousNumber) + parseFloat(state.currentNumber)
+            }
+    }
 }
 
 function reducer(state, {type, payload}) {
     switch (type) {
         case ACTIONS.NEW_NUMBER:
-            return addNumber(state, payload);
+            return addNumber(state, payload.payload.digit);
         case ACTIONS.OPERATOR:
-            return addOperator(state, payload)
+            return {
+                ...state,
+                previousNumber: state.currentNumber,
+                currentNumber: null,
+                operator: payload.payload.operatorType
+            }
         case ACTIONS.RESET:
-            console.log("reset");
-            break;
+            return {
+                ...state,
+                currentNumber: null
+            }
         case ACTIONS.DELETE:
-            console.log("delete");
-            break;
-        case ACTIONS.POINT:
-            console.log("point");
+            if (state.currentNumber != null) {
+                return {
+                    ...state,
+                    currentNumber: state.currentNumber.slice(0, -1)
+                }
+            }
             break;
         case ACTIONS.EQUALS:
-            console.log("equals");
-            break;
+            handleEquals(state);
         default:
             console.log("ERREUR REDUCER: ");
-            console.log(state);
-            console.log(type);
-            console.log(payload);
+            console.table(state);
+            console.table(type);
+            console.table(payload);
     }
 }
 
@@ -60,8 +114,8 @@ function Calculator() {
     return (
         <div className="calculator-grid">
             <div className="output">
-                <div className="calculation">CALCULATION</div>
-                <div className="result">RESULT</div>
+                <div className="calculation">{state.currentNumber}</div>
+                <div className="result"></div>
             </div>
             <button className="span-two" onClick={() => dispatch({type: "Reset"})}>AC</button>
             <button onClick={() => dispatch({type: "Delete"})}>DEL</button>
@@ -80,7 +134,7 @@ function Calculator() {
             <Operator operatorType="-" dispatch={(operatorType) => dispatch({type: "Operator", payload: operatorType})}/>
             <Digit digit="." dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
             <Digit digit="0" dispatch={(digit) => dispatch({type: "NewNumber", payload: digit})}/>
-            <Operator operatorType="=" dispatch={(operatorType) => dispatch({type: "Operator", payload: operatorType})}/>
+            <button className="span-two" onClick={() => dispatch({type: "Equals"})}>=</button>
         </div>
     );
 }
