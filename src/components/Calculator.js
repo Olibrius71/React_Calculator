@@ -13,58 +13,46 @@ const ACTIONS = {
 }
 
 function addNumber(state, newNumber) {
-    //console.table(state);
-    if (newNumber!==".") {
-        if (state.currentNumber != null) {
-            return {...state, currentNumber: state.currentNumber.toString() + newNumber.toString()};
-        }
-        return {
-            ...state,
-            currentNumber: newNumber
-        }
+    if (state.currentNumber != null) {
+        return {...state, currentNumber: state.currentNumber.toString() + newNumber.toString()};
+    }
+    return {
+        ...state,
+        currentNumber: newNumber
     }
 }
-
-/*
-function handleOperator(state, operatorType) {
-    if (operatorType !== "=") {
-        return {
-            ...state,
-            operator: operatorType
-        }
-    }
-    switch (operatorType) {
-        case "+":
-            return ;
-        case "-":
-            return
-        case "x":
-            return
-        case "÷":
-            return
-        case "=":
-            return
-        default:
-            console.log("ERREUR OPERATOR");
-    }
-    console.log("addOpp: ");
-    console.table(state);
-    console.table(operatorType);
-}
-*/
 
 
 function handleEquals(state) {
     if (state.currentNumber == null || state.previousNumber == null) {
         console.log("UN DES 2 NOMBRES N'A PAS DE VALEUR");
-        return;
+        return { ...state };
     }
     console.table(state);
     switch (state.operator) {
         case "+":
             return {
                 ...state,
-                currentNumber: parseFloat(state.previousNumber) + parseFloat(state.currentNumber)
+                currentNumber: parseFloat(state.previousNumber) + parseFloat(state.currentNumber),
+                result: parseFloat(state.previousNumber) + parseFloat(state.currentNumber)
+            }
+        case "-":
+            return {
+                ...state,
+                currentNumber: parseFloat(state.previousNumber) - parseFloat(state.currentNumber),
+                result: parseFloat(state.previousNumber) - parseFloat(state.currentNumber)
+            }
+        case "x":
+            return {
+                ...state,
+                currentNumber: parseFloat(state.previousNumber) * parseFloat(state.currentNumber),
+                result: parseFloat(state.previousNumber) * parseFloat(state.currentNumber)
+            }
+        case "÷":
+            return {
+                ...state,
+                currentNumber: parseFloat(state.previousNumber) / parseFloat(state.currentNumber),
+                result: parseFloat(state.previousNumber) / parseFloat(state.currentNumber)
             }
     }
 }
@@ -78,12 +66,14 @@ function reducer(state, {type, payload}) {
                 ...state,
                 previousNumber: state.currentNumber,
                 currentNumber: null,
+                result: null,
                 operator: payload.payload.operatorType
             }
         case ACTIONS.RESET:
             return {
                 ...state,
-                currentNumber: null
+                currentNumber: null,
+                result: null
             }
         case ACTIONS.DELETE:
             if (state.currentNumber != null) {
@@ -94,12 +84,10 @@ function reducer(state, {type, payload}) {
             }
             break;
         case ACTIONS.EQUALS:
-            handleEquals(state);
+            return handleEquals(state);
         default:
             console.log("ERREUR REDUCER: ");
             console.table(state);
-            console.table(type);
-            console.table(payload);
     }
 }
 
@@ -108,6 +96,7 @@ function Calculator() {
     const [state, dispatch] = useReducer(reducer,{
         previousNumber: null,
         currentNumber: null,
+        result: null,
         operator: null
     });
     
@@ -115,7 +104,7 @@ function Calculator() {
         <div className="calculator-grid">
             <div className="output">
                 <div className="calculation">{state.currentNumber}</div>
-                <div className="result"></div>
+                <div className="result">{state.result}</div>
             </div>
             <button className="span-two" onClick={() => dispatch({type: "Reset"})}>AC</button>
             <button onClick={() => dispatch({type: "Delete"})}>DEL</button>
