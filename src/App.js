@@ -1,8 +1,10 @@
 import './App.css';
-import AppHeader from "./components/AppHeader.js";
-import CalcContainer from "./components/CalcContainer.js";
-import Presentation from "./components/Presentation.js";
+import "bootstrap/dist/css/bootstrap.min.css";
+import AppHeader from "./components/AppHeader.jsx";
+import CalcContainer from "./components/CalcContainer.jsx";
+import Presentation from "./components/Presentation.jsx";
 import Calculator from "./components/Calculator.js";
+import CalcDescription from "./components/CalcDescription";
 
 function App() {
   return (
@@ -10,6 +12,7 @@ function App() {
         <AppHeader />
         <CalcContainer>
             <Presentation />
+            <CalcDescription />
             <Calculator />
         </CalcContainer>
       </div>

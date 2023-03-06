@@ -28,7 +28,6 @@ function handleEquals(state) {
         console.log("UN DES 2 NOMBRES N'A PAS DE VALEUR");
         return { ...state };
     }
-    console.table(state);
     switch (state.operator) {
         case "+":
             return {

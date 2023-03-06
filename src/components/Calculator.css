@@ -2,13 +2,14 @@
     margin: 5vh 0 5vh 0;
     width: auto;
     height: auto;
-    background-color: #ff1238;
+    justify-content: center;
+   /* background-color: #ff1238; */
 
     display: grid;
     grid-template-columns: repeat(4,6rem);
     grid-template-rows: minmax(6rem,auto) repeat(5,6rem);
 
-    box-shadow: 0 0 18px ghostwhite;
+  /*  box-shadow: 0 0 18px ghostwhite; */
 }
 
 .calculator-grid > button {

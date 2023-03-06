@@ -1,0 +1,15 @@
+.calc-descriptions-container {
+    width: auto;
+}
+
+.calc-description-div {
+    width: 28vw;
+    height: auto;
+
+    border: 3px solid ghostwhite;
+}
+
+.calc-description-text {
+    text-align: justify;
+}
+

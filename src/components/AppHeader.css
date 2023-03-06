@@ -1,5 +1,7 @@
 .App-header {
     background-color: #282c34;
 
+    height: 10vh;
     color: white;
+    font-size: 2rem;
 }

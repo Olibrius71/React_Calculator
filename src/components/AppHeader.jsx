@@ -4,7 +4,7 @@ import './AppHeader.css';
 function AppHeader() {
     return (
         <header className="App-header">
-            <h1 className="header-title">Calculator</h1>
+            <h1 className="header-title">ReactJS Calculator</h1>
         </header>
     );
 }
