@@ -13,3 +13,24 @@
     text-align: justify;
 }
 
+.calc-description-button {
+    width: 30%;
+    background-color: #282c34;
+
+    font-size: 18px;
+    border-radius: 12px;
+    transition: background-color 200ms ease-in;
+}
+
+.calc-description-button:hover {
+    background-color: blue;
+}
+
+
+.respawn-button {
+    background-color: #282c34;
+    margin-right: auto;
+    width: 8vw;
+    height: auto;
+    font-size: 19px;
+}

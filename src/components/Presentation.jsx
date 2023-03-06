@@ -2,7 +2,7 @@ import './Presentation.css';
 
 function Presentation() {
     return (
-        <div className="presentation">
+        <div className="presentation p-4">
             Bienvenue sur ce site développé par Anis BEN JEMIA (étudiant en 2ème année de BUT Informatique).
             Le but de ce site est de faire un projet d'introduction au React pour apprendre les concepts principaux
             du framework. Pour l'instant tout n'est pas opérationnel mais je suis plutôt ambiteux: je ferais en sorte
