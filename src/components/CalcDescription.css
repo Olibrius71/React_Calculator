@@ -1,9 +1,9 @@
 .calc-descriptions-container {
-    width: auto;
+    width: 100%;
 }
 
 .calc-description-div {
-    width: 28vw;
+    width: 29vw;
     height: auto;
 
     border: 3px solid ghostwhite;
@@ -29,8 +29,9 @@
 
 .respawn-button {
     background-color: #282c34;
-    margin-right: auto;
     width: 8vw;
     height: auto;
     font-size: 19px;
+
+    left: 20px;
 }

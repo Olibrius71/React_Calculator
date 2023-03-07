@@ -3,22 +3,20 @@
     width: auto;
     height: auto;
     justify-content: center;
-   /* background-color: #ff1238; */
 
     display: grid;
     grid-template-columns: repeat(4,6rem);
     grid-template-rows: minmax(6rem,auto) repeat(5,6rem);
 
-  /*  box-shadow: 0 0 18px ghostwhite; */
 }
 
 .calculator-grid > button {
-    background: linear-gradient(180deg, rgba(0,245,255,1) 4%, rgba(0,57,255,1)  15%, rgba(0,57,255,1) 85%, rgba(0,245,255,1) 96%);
+    background-color: #282c34;
 
     color: ghostwhite;
     font-size: x-large;
 
-    border: 2px solid lightslategray;
+    border: 3px ridge lightslategray;
 
 }
 
